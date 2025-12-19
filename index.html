@@ -5,26 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Heart's Mere | 心之湖</title>
     <style>
-        /* 1. 默认变量：普通模式 (白色) */
-        :root {
-            --bg: #ffffff;
-            --text: #1d1d1f;
-            --sub: #86868b;
-        }
-
-        /* 2. 护眼模式 (明显一点的淡黄色) */
-        [data-theme='sepia'] {
-            --bg: #fdf6e3; /* 经典的 Solarized 黄色，非常护眼 */
-            --text: #657b83;
-            --sub: #93a1a1;
-        }
-
-        /* 3. 夜间模式 (深灰色) */
-        [data-theme='dark'] {
-            --bg: #1a1a1a;
-            --text: #e1e1e1;
-            --sub: #a1a1a1;
-        }
+        /* 1. 定义颜色变量 */
+        :root { --bg: #ffffff; --text: #1d1d1f; --sub: #86868b; }
+        [data-theme='sepia'] { --bg: #fdf6e3; --text: #657b83; --sub: #93a1a1; }
+        [data-theme='dark'] { --bg: #1a1a1a; --text: #e1e1e1; --sub: #a1a1a1; }
 
         body { 
             margin: 0; height: 100vh; display: flex; flex-direction: column; 
@@ -35,13 +19,30 @@
         }
 
         h1 { font-size: 2.8rem; font-weight: 300; margin: 0; }
-        .motto { color: var(--sub); font-style: italic; margin-top: 1.5rem; letter-spacing: 0.3em; }
+        .motto { color: var(--sub); font-style: italic; margin-top: 1.5rem; letter-spacing: 0.3em; margin-bottom: 2rem; }
 
-        #theme-btn {
-            margin-top: 3rem; padding: 10px 24px; cursor: pointer;
-            border: 1px solid var(--sub); background: transparent;
-            color: var(--sub); border-radius: 25px; font-size: 0.9rem;
-            outline: none;
+        /* 2. 按钮容器：设置从上到下排列 */
+        .btn-group {
+            display: flex;
+            flex-direction: column; /* 纵向排列逻辑 */
+            gap: 12px;              /* 按钮之间的间距 */
+        }
+
+        button {
+            padding: 10px 30px;
+            cursor: pointer;
+            border: 1px solid var(--sub);
+            background: transparent;
+            color: var(--sub);
+            border-radius: 25px;
+            font-size: 0.9rem;
+            transition: 0.3s;
+            width: 120px; /* 统一宽度，让视觉更整齐 */
+        }
+
+        button:hover {
+            border-color: var(--text);
+            color: var(--text);
         }
     </style>
 </head>
@@ -50,11 +51,18 @@
     <h1>Heart's Mere</h1>
     <p class="motto">慢慢</p>
 
-    <button id="theme-btn">模式：普通</button>
+    <div class="btn-group">
+        <button onclick="setTheme('light')">普通模式</button>
+        <button onclick="setTheme('sepia')">护眼模式</button>
+        <button onclick="setTheme('dark')">夜间模式</button>
+    </div>
 
     <script>
-        const btn = document.getElementById('theme-btn');
-        const html = document.documentElement;
-        
-        // 核心逻辑：定义三个状态
-        // 索引
+        // 极简逻辑：直接根据传入的模式名修改属性
+        function setTheme(mode) {
+            document.documentElement.setAttribute('data-theme', mode);
+            console.log('已切换至:', mode);
+        }
+    </script>
+</body>
+</html>
