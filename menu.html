@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>目录 | Heart's Mere</title>
+    <style>
+        /* 这里的颜色变量必须和以前一样，保证无缝衔接 */
+        :root { --bg: #ffffff; --text: #1d1d1f; --sub: #86868b; --card-bg: #f5f5f7; }
+        
+        [data-theme='sepia'] { --bg: #fdf6e3; --text: #5b4636; --sub: #8c7a6b; --card-bg: #eee8d5; }
+        [data-theme='dark'] { --bg: #1a1a1a; --text: #e1e1e1; --sub: #a1a1a1; --card-bg: #2c2c2e; }
+
+        body { 
+            margin: 0; min-height: 100vh; padding: 40px 20px;
+            font-family: -apple-system, sans-serif; 
+            background-color: var(--bg); color: var(--text);
+            transition: background 0.3s;
+        }
+
+        h2 { font-weight: 300; margin-bottom: 30px; text-align: center; }
+
+        /* 文件夹网格布局 */
+        .folder-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); /* 自动适应屏幕 */
+            gap: 20px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        /* 文件夹卡片样式 */
+        .folder-card {
+            background: var(--card-bg);
+            padding: 30px 20px;
+            border-radius: 15px;
+            text-align: center;
+            text-decoration: none;
+            color: var(--text);
+            transition: transform 0.2s;
+            border: 1px solid transparent;
+        }
+        .folder-card:hover { transform: translateY(-5px); border-color: var(--sub); }
+        .icon { font-size: 2rem; display: block; margin-bottom: 10px; }
+        .name { font-size: 1rem; font-weight: 500; }
+
+        /* 右下角悬浮的“后悔药”按钮 */
+        .fab-switch {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: var(--text);
+            color: var(--bg);
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            font-size: 1.2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 999;
+        }
+    </style>
+</head>
+<body>
+
+    <h2>Current Collections</h2>
+
+    <div class="folder-grid">
+        <a href="posts/index.html" class="folder-card">
+            <span class="icon">📂</span>
+            <span class="name">东拼西凑</span>
+        </a>
+
+        <a href="#" class="folder-card" style="opacity: 0.5; cursor: default;">
+            <span class="icon">🔒</span>
+            <span class="name">待开发...</span>
+        </a>
+    </div>
+
+    <button class="fab-switch" id="fab" title="切换模式">🎨</button>
+
+    <script>
+        // 1. 进门检测：你是带着什么颜色进来的？
+        const savedTheme = localStorage.getItem('userTheme') || 'light';
+        document.documentElement.setAttribute('data-theme', savedTheme);
+
+        // 2. 后悔药逻辑：点击右下角按钮，循环切换颜色
+        const fab = document.getElementById('fab');
+        const themes = ['light', 'sepia', 'dark'];
+        let currentThemeIndex = themes.indexOf(savedTheme);
+        if (currentThemeIndex === -1) currentThemeIndex = 0;
+
+        fab.onclick = function() {
+            currentThemeIndex = (currentThemeIndex + 1) % themes.length;
+            const newTheme = themes[currentThemeIndex];
+            
+            // 变色
+            document.documentElement.setAttribute('data-theme', newTheme);
+            // 记住新选择 (这样点进文章里也能保持)
+            localStorage.setItem('userTheme', newTheme);
+        };
+    </script>
+</body>
+</html>
