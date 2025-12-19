@@ -60,7 +60,6 @@
         <h1>Heart's Mere</h1>
         <hr>
         <p class="motto">“慢慢”</p>
-        <div class="identity">Data Science · University of Bristol</div>
     </div>
 </body>
 </html>
