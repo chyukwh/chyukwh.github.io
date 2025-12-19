@@ -1,1 +1,67 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>我的第一篇日记</title>
+    <style>
+        /* 保持和主页一致的护眼逻辑 */
+        :root { --bg: #ffffff; --text: #1d1d1f; --sub: #86868b; }
+        [data-theme='sepia'] { --bg: #fdf6e3; --text: #5b4636; --sub: #8c7a6b; }
+        [data-theme='dark'] { --bg: #1a1a1a; --text: #e1e1e1; --sub: #a1a1a1; }
 
+        body { 
+            margin: 0; min-height: 100vh; 
+            display: flex; flex-direction: column; align-items: center; 
+            font-family: -apple-system, sans-serif; 
+            background-color: var(--bg); color: var(--text);
+            transition: background 0.3s ease;
+            padding: 40px 20px;
+            line-height: 1.8; /* 增加行高，阅读更舒服 */
+        }
+
+        /* 文章容器 */
+        article { width: 100%; max-width: 650px; }
+        
+        h1 { font-size: 2rem; margin-bottom: 10px; }
+        .meta { color: var(--sub); font-size: 0.9rem; margin-bottom: 40px; }
+        
+        p { margin-bottom: 20px; text-align: justify; }
+
+        /* 返回按钮 */
+        .back-nav {
+            margin-top: 60px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(134, 134, 139, 0.2);
+            width: 100%;
+            text-align: center;
+        }
+        .back-nav a { text-decoration: none; color: var(--sub); font-size: 0.9rem; }
+        .back-nav a:hover { color: var(--text); }
+    </style>
+</head>
+<body>
+
+    <article>
+        <h1>布里斯托的雨夜</h1>
+        <div class="meta">2025年12月19日 · 英国</div>
+
+        <p>这是我发布在 Heart's Mere 的第一篇文章。</p>
+        
+        <p>今天布里斯托又下雨了。作为数据科学的学生，我有时候会想，能不能建立一个模型来预测这个城市下一场雨会持续多久？但这也许就是它的魅力，充满了随机变量的不确定性。</p>
+
+        <p>在这里，我可以慢慢思考，慢慢记录。</p>
+    </article>
+
+    <div class="back-nav">
+        <a href="index.html">← 返回文章列表</a>
+    </div>
+
+    <script>
+        // 检测系统是否开启了深色模式，如果开启则自动切换
+        if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+            document.documentElement.setAttribute('data-theme', 'dark');
+        }
+    </script>
+</body>
+</html>
