@@ -3,23 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Heart's Mere</title>
+    <title>Heart's Mere | 心之湖</title>
     <style>
-        /* 强制定义基础样式，防止浏览器默认样式干扰 */
-        /* 1. 默认变量：普通模式 (Light) */
+        /* 1. 默认变量：普通模式 (白色) */
         :root {
             --bg: #ffffff;
             --text: #1d1d1f;
             --sub: #86868b;
         }
 
-        /* 2. 护眼模式 (Sepia) - 模拟纸张颜色，减少蓝光 */
+        /* 2. 护眼模式 (明显一点的淡黄色) */
         [data-theme='sepia'] {
-            --bg: #f4ecd8; 
-            --text: #5b4636;
-            --sub: #8c7a6b;
+            --bg: #fdf6e3; /* 经典的 Solarized 黄色，非常护眼 */
+            --text: #657b83;
+            --sub: #93a1a1;
         }
 
+        /* 3. 夜间模式 (深灰色) */
         [data-theme='dark'] {
             --bg: #1a1a1a;
             --text: #e1e1e1;
@@ -31,19 +31,18 @@
             align-items: center; justify-content: center; 
             font-family: -apple-system, sans-serif; 
             background-color: var(--bg); color: var(--text);
-            transition: 0.5s ease; /* 增加一点点平滑感 */
+            transition: background 0.5s ease; 
         }
 
-        h1 { font-size: 2.8rem; font-weight: 300; margin: 0; letter-spacing: 1px; }
-        .motto { color: var(--sub); font-style: italic; margin-top: 1.5rem; letter-spacing: 0.2em; }
+        h1 { font-size: 2.8rem; font-weight: 300; margin: 0; }
+        .motto { color: var(--sub); font-style: italic; margin-top: 1.5rem; letter-spacing: 0.3em; }
 
         #theme-btn {
-            margin-top: 3rem; padding: 10px 20px; cursor: pointer;
+            margin-top: 3rem; padding: 10px 24px; cursor: pointer;
             border: 1px solid var(--sub); background: transparent;
-            color: var(--sub); border-radius: 25px; font-size: 0.85rem;
-            transition: 0.3s;
+            color: var(--sub); border-radius: 25px; font-size: 0.9rem;
+            outline: none;
         }
-        #theme-btn:hover { border-color: var(--text); color: var(--text); }
     </style>
 </head>
 <body>
@@ -57,24 +56,5 @@
         const btn = document.getElementById('theme-btn');
         const html = document.documentElement;
         
-        // 定义循环逻辑：普通 -> 护眼 -> 夜间 -> 普通
-        const themes = ['light', 'sepia', 'dark'];
-        const labels = ['普通', '护眼', '夜间'];
-        let currentIndex = 0;
-
-        btn.onclick = function() {
-            // 索引增加 1，到达 3 时取模回到 0
-            currentIndex = (currentIndex + 1) % themes.length;
-            
-            const nextTheme = themes[currentIndex];
-            const nextLabel = labels[currentIndex];
-
-            // 1. 修改 HTML 属性触发 CSS 变量切换
-            html.setAttribute('data-theme', nextTheme);
-            
-            // 2. 更新按钮文字
-            btn.innerText = '模式：' + nextLabel;
-        };
-    </script>
-</body>
-</html>
+        // 核心逻辑：定义三个状态
+        // 索引
