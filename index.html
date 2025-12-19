@@ -2,67 +2,66 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Heart's Mere | 心之湖</title>
     <style>
-        /* 1. 定义颜色变量（逻辑核心） */
+        /* 强制定义基础样式，防止浏览器默认样式干扰 */
         :root {
-            --bg: #ffffff;      /* 普通模式背景：纯白 */
-            --text: #1d1d1f;    /* 普通模式文字：深黑 */
-            --sub: #86868b;
+            --bg: #fafafa;
+            --text: #1d1d1f;
         }
 
-        /* 2. 定义夜间/护眼模式变量 */
-        [data-theme='dark'] {
-            --bg: #1a1a1a;      /* 夜间背景：深灰（比纯黑护眼） */
-            --text: #e1e1e1;    /* 夜间文字：浅灰（不刺眼） */
-            --sub: #a1a1a1;
+        /* 护眼模式颜色 - 使用极简逻辑 */
+        .dark-mode {
+            --bg: #1a1a1a !important;
+            --text: #e1e1e1 !important;
         }
 
         body { 
-            margin: 0; height: 100vh; display: flex; flex-direction: column; 
-            align-items: center; justify-content: center; 
-            font-family: -apple-system, sans-serif; 
-            background-color: var(--bg); /* 使用变量 */
-            color: var(--text);          /* 使用变量 */
-            transition: 0.3s;            /* 切换时的平滑过渡效果 */
+            margin: 0; 
+            height: 100vh; 
+            display: flex; 
+            flex-direction: column; 
+            align-items: center; 
+            justify-content: center; 
+            background-color: var(--bg); 
+            color: var(--text);
+            font-family: sans-serif;
+            transition: background 0.3s, color 0.3s;
         }
 
-        h1 { font-size: 2.5rem; font-weight: 300; }
-        .motto { color: var(--sub); font-style: italic; margin-top: 1.5rem; }
+        h1 { font-size: 2.5rem; font-weight: 300; margin: 0; }
+        p { font-style: italic; margin: 1.5rem 0; }
 
-        /* 切换按钮样式 */
-        #theme-btn {
-            margin-top: 3rem;
-            padding: 8px 16px;
+        #btn {
+            padding: 10px 20px;
             cursor: pointer;
-            border: 1px solid var(--sub);
+            border: 1px solid #86868b;
             background: transparent;
-            color: var(--sub);
-            border-radius: 20px;
-            font-size: 0.8rem;
+            color: inherit;
+            border-radius: 5px;
         }
     </style>
 </head>
-<body>
+<body id="content">
 
     <h1>Heart's Mere</h1>
-    <p class="motto">慢慢</p>
-
-    <button id="theme-btn">切换模式</button>
+    <p>慢慢</p>
+    <button id="btn">切换护眼模式</button>
 
     <script>
-        const btn = document.getElementById('theme-btn');
-        // 点击逻辑：在 HTML 标签上切换 data-theme 属性
-        btn.addEventListener('click', () => {
-            const currentTheme = document.documentElement.getAttribute('data-theme');
-            if (currentTheme === 'dark') {
-                document.documentElement.setAttribute('data-theme', 'light');
-                btn.innerText = '夜间模式';
-            } else {
-                document.documentElement.setAttribute('data-theme', 'dark');
+        // 极简逻辑：直接切换 body 的 class
+        const btn = document.getElementById('btn');
+        const body = document.body;
+
+        btn.onclick = function() {
+            body.classList.toggle('dark-mode');
+            if (body.classList.contains('dark-mode')) {
                 btn.innerText = '普通模式';
+            } else {
+                btn.innerText = '护眼模式';
             }
-        });
+        };
     </script>
 </body>
 </html>
