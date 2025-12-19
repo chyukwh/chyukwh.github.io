@@ -24,7 +24,6 @@
             display: flex;
             flex-direction: column; /* 垂直排列 */
             gap: 15px;
-            /* 关键修复：确保按钮层级最高，不被遮挡 */
             position: relative; 
             z-index: 100;
         }
@@ -33,7 +32,7 @@
         .mode-btn {
             width: 140px;
             padding: 12px 0;
-            cursor: pointer; /* 鼠标放上去变手指 */
+            cursor: pointer; 
             border: 1px solid var(--sub);
             background: transparent;
             color: var(--sub);
@@ -49,7 +48,6 @@
             background-color: rgba(125, 125, 125, 0.1);
         }
         
-        /* 激活状态样式 (可选) */
         .mode-btn:active { transform: scale(0.98); }
     </style>
 </head>
@@ -63,8 +61,8 @@
         <button id="btn-sepia" class="mode-btn">护眼模式</button>
         <button id="btn-dark" class="mode-btn">夜间模式</button>
     </div>
-    
-<div style="margin-top: 40px; text-align: center;">
+
+    <div style="margin-top: 40px; text-align: center;">
         <a href="posts/readme.md" style="
             text-decoration: none; 
             color: var(--sub); 
@@ -77,15 +75,13 @@
             📂 东拼西凑
         </a>
     </div>
-    
+
     <script>
-        // 获取三个按钮
         const btnLight = document.getElementById('btn-light');
         const btnSepia = document.getElementById('btn-sepia');
         const btnDark = document.getElementById('btn-dark');
         const html = document.documentElement;
 
-        // 绑定点击事件 - 最稳妥的写法
         btnLight.addEventListener('click', function() {
             html.setAttribute('data-theme', 'light');
         });
